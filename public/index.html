@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polar Parallel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --arctic-black: #05070a;
+            --glacier-blue: #00d4ff;
+            --snow-white: #f8fafc;
+            --ice-gray: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--arctic-black);
+            color: var(--snow-white);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: radial-gradient(circle at 50% 50%, #0c121d 0%, #05070a 100%);
+        }
+
+        .content {
+            text-align: center;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 200;
+            margin-bottom: 1rem;
+            background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-link {
+            display: inline-block;
+            font-size: 1rem;
+            color: var(--glacier-blue);
+            text-decoration: none;
+            font-weight: 400;
+            margin-top: 10px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0.8;
+        }
+
+        .contact-link:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+            text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+        }
+
+        .line {
+            width: 40px;
+            height: 1px;
+            background: var(--glacier-blue);
+            margin: 2rem auto;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <h1>Polar Parallel</h1>
+        <div class="line"></div>
+        <a href="mailto:contact@polarparallel.com" class="contact-link">
+            contact@polarparallel.com
+        </a>
+    </div>
+
+</body>
+</html>
