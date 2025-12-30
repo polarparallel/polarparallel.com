@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Polar Parallel</title>
+    <meta name="description" content="Software for a connected world.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --arctic-black: #05070a;
-            --glacier-blue: #00d4ff;
-            --snow-white: #f8fafc;
-            --ice-gray: #64748b;
+            --void: #050a0e;
+            --aurora-teal: #5eead4;
+            --aurora-cyan: #22d3ee;
+            --aurora-green: #4ade80;
+            --text-primary: #f0f4f8;
+            --text-muted: #64748b;
         }
 
         * {
@@ -22,66 +25,187 @@
         }
 
         body {
-            background-color: var(--arctic-black);
-            color: var(--snow-white);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: var(--void);
+            color: var(--text-primary);
+            font-family: 'Zen Kaku Gothic New', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
             margin: 0;
-            background: radial-gradient(circle at 50% 50%, #0c121d 0%, #05070a 100%);
+            overflow: hidden;
         }
 
+        /* Aurora effect */
+        .aurora {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .aurora::before,
+        .aurora::after {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 60%;
+            top: -20%;
+            left: -50%;
+            background: radial-gradient(ellipse at center,
+                rgba(94, 234, 212, 0.07) 0%,
+                rgba(34, 211, 238, 0.04) 30%,
+                transparent 60%);
+            animation: aurora-drift 30s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        .aurora::after {
+            background: radial-gradient(ellipse at center,
+                rgba(74, 222, 128, 0.05) 0%,
+                rgba(94, 234, 212, 0.03) 40%,
+                transparent 60%);
+            animation: aurora-drift 40s ease-in-out infinite reverse;
+            animation-delay: -15s;
+            top: -30%;
+            left: -30%;
+        }
+
+        @keyframes aurora-drift {
+            0%, 100% {
+                transform: translateX(-5%) rotate(-3deg) scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateX(5%) rotate(3deg) scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        /* Stars */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            background: var(--text-primary);
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle var(--duration) ease-in-out infinite;
+            animation-delay: var(--delay);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: var(--brightness); }
+        }
+
+        /* Main content */
         .content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             text-align: center;
-            letter-spacing: -0.02em;
+            padding: 2rem;
         }
 
         h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            font-weight: 200;
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            font-weight: 300;
+            letter-spacing: 0.2em;
             margin-bottom: 1rem;
-            background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-primary);
+        }
+
+        .tagline {
+            font-size: clamp(0.875rem, 2vw, 1rem);
+            font-weight: 400;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            margin-bottom: 3rem;
+        }
+
+        .line {
+            width: 32px;
+            height: 1px;
+            background: var(--aurora-teal);
+            margin-bottom: 2rem;
+            opacity: 0.4;
         }
 
         .contact-link {
-            display: inline-block;
-            font-size: 1rem;
-            color: var(--glacier-blue);
-            text-decoration: none;
+            font-size: 0.875rem;
             font-weight: 400;
-            margin-top: 10px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            opacity: 0.8;
+            color: var(--aurora-teal);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: opacity 0.3s ease;
+            opacity: 0.7;
         }
 
         .contact-link:hover {
             opacity: 1;
-            transform: translateY(-2px);
-            text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
         }
 
-        .line {
-            width: 40px;
-            height: 1px;
-            background: var(--glacier-blue);
-            margin: 2rem auto;
-            opacity: 0.3;
+        /* Latitude arc */
+        .latitude-arc {
+            position: fixed;
+            bottom: -600px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1400px;
+            height: 700px;
+            border: 1px solid var(--aurora-teal);
+            border-radius: 50%;
+            opacity: 0.12;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
+    <div class="aurora"></div>
+    <div class="stars" id="stars"></div>
+    <div class="latitude-arc"></div>
+
     <div class="content">
-        <h1>Polar Parallel</h1>
+        <h1>POLAR PARALLEL</h1>
+        <p class="tagline">Software for a connected world</p>
         <div class="line"></div>
         <a href="mailto:contact@polarparallel.com" class="contact-link">
             contact@polarparallel.com
         </a>
     </div>
+
+    <script>
+        (function() {
+            const container = document.getElementById('stars');
+            const count = 50;
+
+            for (let i = 0; i < count; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.setProperty('--delay', (Math.random() * 10) + 's');
+                star.style.setProperty('--duration', (5 + Math.random() * 8) + 's');
+                star.style.setProperty('--brightness', (0.15 + Math.random() * 0.3));
+                container.appendChild(star);
+            }
+        })();
+    </script>
 
 </body>
 </html>
