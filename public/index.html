@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Polar Parallel</title>
-    <meta name="description" content="Software for a connected world.">
+    <meta name="description" content="Polar Parallel LLC is a software development and consulting company based in Sioux Falls, SD.">
     <style>
         /* Self-hosted fonts on CDN */
         @font-face {
@@ -154,7 +154,24 @@
             font-weight: 400;
             color: var(--text-muted);
             letter-spacing: 0.1em;
-            margin-bottom: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .description {
+            font-size: clamp(0.875rem, 2vw, 1rem);
+            font-weight: 400;
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 400px;
+            margin-bottom: 1rem;
+        }
+
+        .location {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            margin-bottom: 2.5rem;
+            opacity: 0.7;
         }
 
         .line {
@@ -177,6 +194,18 @@
 
         .contact-link:hover {
             opacity: 1;
+        }
+
+        .copyright {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            opacity: 0.5;
+            z-index: 1;
         }
 
         /* Latitude arc */
@@ -203,11 +232,15 @@
     <div class="content">
         <h1>POLAR PARALLEL</h1>
         <p class="tagline">Software for a connected world</p>
+        <p class="description">Software development and consulting</p>
+        <p class="location">Sioux Falls, SD</p>
         <div class="line"></div>
         <a href="mailto:contact@polarparallel.com" class="contact-link">
             contact@polarparallel.com
         </a>
     </div>
+
+    <p class="copyright">Copyright 2026 Polar Parallel LLC</p>
 
     <script>
         (function() {
